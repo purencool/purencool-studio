@@ -44,7 +44,9 @@ USER app
 ##
 RUN git clone https://github.com/purencool/purencool-studio-js.git ${APP_DIRECTORY}
 RUN chown app:app -R ${APP_DIRECTORY}
-RUN cd ${APP_DIRECTORY} && npm install && npm run start
+RUN cd ${APP_DIRECTORY} && npm install
+
+#&& npm run start
 
 
 ##

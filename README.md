@@ -1,5 +1,10 @@
 # purencool-studio
 
+### Build
+For this to build you will need to do the following
+1. config.js needs to be installed
+
+
 
 ### Development
 
