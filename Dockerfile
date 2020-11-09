@@ -1,8 +1,9 @@
-FROM alpine:latest
+FROM node:alpine
 LABEL Maintainer="Purencool <purencool@gmail.com>" \
       Description="Purencool studio development server default image."
 
 ##
+# https://stackoverflow.com/questions/49582202/cloning-a-git-repo-in-dockerfile-and-working-off-it
 # Variables
 ##
 ARG APP_DIRECTORY=/home/app/
@@ -13,18 +14,24 @@ ARG APP_DIRECTORY=/home/app/
 ##
 ARG ENV
 
+##
+#
+##
+WORKDIR /home
+
 
 ##
-# Bash if needed
+# Bash if needed for testing
 ##
-RUN apk add bash
+RUN apk add bash vim
 
 
 ##
 # Package need to run node
 ##
-RUN apk add --update nodejs npm git
-
+RUN apk add --update nodejs
+RUN apk add --no-cache git
+RUN apk add --no-cache openssh
 
 ##
 # Add Node and App groups and users
@@ -43,10 +50,8 @@ USER app
 # Clone react software into app directory
 ##
 RUN git clone https://github.com/purencool/purencool-studio-js.git ${APP_DIRECTORY}
-RUN chown app:app -R ${APP_DIRECTORY}
-RUN cd ${APP_DIRECTORY} && npm install
+COPY ./config/config.js ${APP_DIRECTORY}/src/config.js
 
-#&& npm run start
 
 
 ##
@@ -58,4 +63,6 @@ EXPOSE 3000
 ##
 #
 ##
-HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:3000/fpm-ping
+#HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:3000/fpm-ping
+
+CMD [ "node", "server.js" ]
