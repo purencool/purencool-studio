@@ -36,14 +36,14 @@ RUN apk add --no-cache openssh
 ##
 # Add Node and App groups and users
 ##
-RUN addgroup -S node && adduser -S node -G node
-RUN addgroup -g 1000 -S app && adduser -S app -u 1000 -G app  -h ${APP_DIRECTORY} -D app
+#RUN addgroup -S node && adduser -S node -G node
+#RUN addgroup -g 1000 -S app && adduser -S app -u 1000 -G app  -h ${APP_DIRECTORY} -D app
 
 
 ##
 # Change user
 ##
-USER app
+#USER app
 
 
 ##
