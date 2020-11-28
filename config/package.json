@@ -1,7 +1,7 @@
 {
   "name": "purencool-studio",
   "version": "1.0.0",
-  "description": "A Express.js based webserver which only serves static files",
+  "description": "Purencool Studio is an Express web server for a React Application that runs in your browser locally.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

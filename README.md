@@ -1,5 +1,5 @@
 # Purencool Studio 
-Purencool Studio is a docker wrapper for a React, Nodejs Application that runs in a browser on any host operating system.
+Purencool Studio is an Express web server for a React Application that runs in your browser locally.
 
 ### Build
 For this to build you will need to do the following
