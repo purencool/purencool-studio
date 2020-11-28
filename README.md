@@ -36,13 +36,21 @@ docker ps -a
 docker exec -it purencool_studio  /bin/sh
 ```
 
-#### Remove all running images 
+#### Stop all docker ps
+
+```
+ docker stop $(docker ps -aq)
+```
+
+
+#### Removed all images that in a halted state 
+
 
 ```
  docker rm $(docker ps -aq)
 ```
 
-#### Remove all dangling images
+#### Removed all dangling images
 
 ```
 docker rmi $(docker images --quiet --filter "dangling=true")

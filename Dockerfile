@@ -11,6 +11,7 @@ ARG WWW_DIRECTORY=/user/src/app
 ##
 # Add git
 ##
+RUN apk add --update nodejs nodejs-npm
 RUN apk add --no-cache git
 
 
@@ -42,23 +43,23 @@ RUN mkdir -p ${WWW_DIRECTORY} && \
 ##
 COPY ./config/config.js ${WWW_DIRECTORY}/www/src/config.js
 COPY ./config/* ${WWW_DIRECTORY}/
-RUN  rm ${WWW_DIRECTORY}/config.js && rm ${WWW_DIRECTORY}/config.example.js && chown node: ${WWW_DIRECTORY}
+#RUN  npm install --only=production --suppress-package-metadata-warnings
+RUN  rm ${WWW_DIRECTORY}/config.js && \
+     rm ${WWW_DIRECTORY}/config.example.js && \
+     chown node: ${WWW_DIRECTORY}
 USER node
-
 
 
 ##
 # Install server software
 ##
 WORKDIR ${WWW_DIRECTORY}
-#$ENV NODE_ENV production
-RUN npm install --only=production
 
 
 
 #ENV HOST "0.0.0.0"
 #ENV PORT 3000
-#EXPOSE 3000
+EXPOSE 3000
 
 #COPY . .
 
