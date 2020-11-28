@@ -25,40 +25,36 @@ RUN apk add --no-cache git
 
 
 
-
 ##
-# Setup application directory
+# Setup application directory structure and software
 ##
 RUN mkdir -p ${WWW_DIRECTORY} && \
     mkdir -p ${WWW_DIRECTORY}/www && \
     git clone --depth 1  https://github.com/purencool/purencool-studio-js.git   ${WWW_DIRECTORY}/temp  && \
     cd ${WWW_DIRECTORY}/temp/www && \
     mv ./* ${WWW_DIRECTORY}/www && \
-    rm -Rf ${WWW_DIRECTORY}/temp && \
-    chown node: ${WWW_DIRECTORY}
+    rm -Rf ${WWW_DIRECTORY}/temp
 
+
+
+##
+# Install server configuration and setup node as owner
+##
 COPY ./config/config.js ${WWW_DIRECTORY}/www/src/config.js
-
+COPY ./config/* ${WWW_DIRECTORY}/
+RUN  rm ${WWW_DIRECTORY}/config.js && rm ${WWW_DIRECTORY}/config.example.js && chown node: ${WWW_DIRECTORY}
 USER node
+
+
+
+##
+# Install server software
+##
 WORKDIR ${WWW_DIRECTORY}
-
-
-
-
-##
-# Install application
-##
-#RUN git clone --depth 1  https://github.com/purencool/purencool-studio-js.git   ${WWW_DIRECTORY}/temp
-#COPY ./config/config.js ${WWW_DIRECTORY}/src/config.js
-#RUN cp ${WWW_DIRECTORY}/temp/www ${WWW_DIRECTORY} && rm -rf  ${WWW_DIRECTORY}/temp
-
-##
-# Setup web server
-##
-#COPY package*.json ./
-
 #$ENV NODE_ENV production
-#RUN npm install --only=production
+RUN npm install --only=production
+
+
 
 #ENV HOST "0.0.0.0"
 #ENV PORT 3000

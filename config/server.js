@@ -1,10 +1,10 @@
 const express = require('express'),
     app = express(),
     cors = require('cors'),
-    customize = require('./customize'),
+   // customize = require('./customize'),
     morgan = require('morgan')
 
-customize(app)
+//customize(app)
 
 // Request logger
 app.use(morgan('combined'))
@@ -30,4 +30,4 @@ app.use(function (req, res, next) {
     res.status(404).end()
 });
 
-app.listen(process.env.PORT || 8080, '0.0.0.0')
+app.listen(process.env.PORT || 3000, '0.0.0.0')

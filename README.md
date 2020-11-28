@@ -41,3 +41,9 @@ docker exec -it purencool_studio  /bin/sh
 ```
  docker rm $(docker ps -aq)
 ```
+
+#### Remove all dangling images
+
+```
+docker rmi $(docker images --quiet --filter "dangling=true")
+```
