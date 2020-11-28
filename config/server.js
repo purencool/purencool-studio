@@ -1,33 +1,11 @@
-const express = require('express'),
-    app = express(),
-    cors = require('cors'),
-   // customize = require('./customize'),
-    morgan = require('morgan')
+const express = require('express')
+const app = express()
+const port = 3000
 
-//customize(app)
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
 
-// Request logger
-app.use(morgan('combined'))
-
-// CORS cross origin request policy
-app.use(cors({
-    //origin: process.env.CORS || 'https://*.autopilothq.com'
-}))
-if (process.env.CORS) {
-    console.info('CORS is set')
-}
-
-// Static files
-app.use(express.static(__dirname + '/www'))
-
-// Test webserver
-app.get('/status', function (req, res) {
-    res.send('Hello from the Node Webserver!')
-});
-
-// Page not found
-app.use(function (req, res, next) {
-    res.status(404).end()
-});
-
-app.listen(process.env.PORT || 3000, '0.0.0.0')
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})

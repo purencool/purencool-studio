@@ -2,7 +2,7 @@
   "name": "purencool-studio",
   "version": "1.0.0",
   "description": "A Express.js based webserver which only serves static files",
-  "main": "config/server.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,9 +20,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/netresearch/node-webserver/issues"
+    "url": "https://github.com/purencool/purencool-studio"
   },
-  "homepage": "https://hub.docker.com/r/netresearch/node-webserver",
+  "homepage": "https://purencool.digital",
   "dependencies": {
     "cors": "*",
     "express": "*",
