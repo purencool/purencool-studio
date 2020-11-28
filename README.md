@@ -33,10 +33,10 @@ docker ps -a
 ```
 
 ```
-docker exec -it purencool_studio  /bin/bash
+docker exec -it purencool_studio  /bin/sh
 ```
 
-#### Remove all images 
+#### Remove all running images 
 
 ```
  docker rm $(docker ps -aq)
