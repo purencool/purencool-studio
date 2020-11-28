@@ -17,30 +17,26 @@ The below commands we use commonly in the development of this docker image
 ```
 docker images
 ```
+Completely delete any reference of purencool_studio locally
 
 ```
-docker stop purencool_studio
-```
-
-```
+docker stop purencool_studio && \
+docker rm  purencool_studio && \
 docker rmi -f purencool_studio
 ```
 
-```
-docker build -t "purencool_studio:latest" .
-```
+To rebuild and test purencool_studio locally
 
 ```
-docker run --name=purencool_studio -d -p 3000:3000 -t purencool_studio:latest
-```
-
-```
-docker ps -a
-```
-
-```
+docker build -t "purencool_studio:latest" . && \
+docker images && \
+docker run --name=purencool_studio -d -p 3000:3000 -t purencool_studio:latest && \
 docker exec -it purencool_studio  /bin/sh
 ```
+
+
+
+
 
 ##### Stop all docker ps
 

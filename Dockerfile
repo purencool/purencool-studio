@@ -9,14 +9,6 @@ ARG WWW_DIRECTORY=/user/src/app
 
 
 ##
-# Add git
-##
-RUN apk add --update nodejs nodejs-npm
-RUN apk add --no-cache git
-
-
-
-##
 # dumb-init is a simple process
 # supervisor and init system designed
 # to run as PID 1 inside minimal container
@@ -25,11 +17,11 @@ RUN apk add --no-cache git
 #RUN chmod +x /usr/local/bin/dumb-init
 
 
-
 ##
 # Setup application directory structure and software
 ##
-RUN mkdir -p ${WWW_DIRECTORY} && \
+RUN apk add git && \
+    mkdir -p ${WWW_DIRECTORY} && \
     mkdir -p ${WWW_DIRECTORY}/www && \
     git clone --depth 1  https://github.com/purencool/purencool-studio-js.git   ${WWW_DIRECTORY}/temp  && \
     cd ${WWW_DIRECTORY}/temp/www && \
@@ -43,8 +35,9 @@ RUN mkdir -p ${WWW_DIRECTORY} && \
 ##
 COPY ./config/config.js ${WWW_DIRECTORY}/www/src/config.js
 COPY ./config/* ${WWW_DIRECTORY}/
-#RUN  npm install --only=production --suppress-package-metadata-warnings
-RUN  rm ${WWW_DIRECTORY}/config.js && \
+
+RUN  cd ${WWW_DIRECTORY} && npm install --only=production && \
+     rm ${WWW_DIRECTORY}/config.js && \
      rm ${WWW_DIRECTORY}/config.example.js && \
      chown node: ${WWW_DIRECTORY}
 USER node
@@ -55,13 +48,8 @@ USER node
 ##
 WORKDIR ${WWW_DIRECTORY}
 
-
-
-#ENV HOST "0.0.0.0"
-#ENV PORT 3000
 EXPOSE 3000
 
-#COPY . .
 
 #ENTRYPOINT ["dumb-init", "--"]
-#CMD ["npm", "start"]
+CMD ["node", "server.js"]
