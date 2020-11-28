@@ -24,8 +24,7 @@
   },
   "homepage": "https://purencool.digital",
   "dependencies": {
-    "cors": "*",
-    "express": "*",
-    "morgan": "*"
+    "compression": "^1.7.4",
+    "express": "*"
   }
 }

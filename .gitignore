@@ -1,2 +1,4 @@
 config/config.js
+/config/node_modules
+/config/node_modules/*
 /tests/*

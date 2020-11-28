@@ -1,11 +1,26 @@
+/**
+ * Imported packages needed
+ */
 const express = require('express')
-const app = express()
+const compression = require('compression')
+
+
+/**
+ * Server configuration
+ */
+
+// Port Number
 const port = 3000
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
 
+
+/**
+ *  Server run time
+ * @type {*|Express}
+ */
+const app = express()
+app.use(compression())
+app.use(express.static('www'))
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Purencool Studio is  listening on http://localhost:${port}`)
 })
